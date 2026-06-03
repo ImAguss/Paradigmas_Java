@@ -1,0 +1,177 @@
+Práctico Nº2: Haskell - Ejercicios Resueltos
+
+=========================================
+EJERCICIO 1: Evaluación de funciones
+=========================================
+
+1. (min (max 3 4) (max 7 3)) = 4
+
+2. (succ 9) + (max 5 4) + 1 = 10 + 5 + 1 = 16
+
+3. (max (succ (max 6 8)) (succ (min 6 8))) = (max 9 7) = 9
+
+4. (div 15 4) = 3   -- división entera, trunca
+
+5. (head [3, 6, 9]) = 3
+
+6. (head ['a','b','c']) = 'a'
+
+7. (head "abcd") = 'a'
+
+8. (tail (head (tail ["ab","cd"]))) = "d"
+   -- tail ["ab","cd"] = ["cd"]; head ["cd"] = "cd"; tail "cd" = "d"
+
+9. impares = ["uno", "tres"]
+
+10. ("cinco" : impares) = ["cinco", "uno", "tres"]
+    -- cons: elemento : lista
+
+11. (["siete"] ++ impares) = ["siete", "uno", "tres"]
+    -- ++ concatena dos listas
+
+12. impares = ["uno", "tres"]
+
+13. (last impares) = "tres"
+
+14. uno = [3, 1, 8, 5, 4, 2]
+15. dos = [7, 9, 3, 5, 1]
+16. nueva = [(head uno), (head dos)] = [3, 7]
+
+17. (splitAt 3 uno) = ([3, 1, 8], [5, 4, 2])
+    -- splitAt devuelve una tupla con dos listas
+
+18. (uno !! 2) = 8  -- !! es 0-indexed
+
+19. (dos !! 0) = 7
+
+20. lista = [(uno !! 2), (dos !! 3)] = [8, 5]
+
+21. (sum uno) = 3+1+8+5+4+2 = 23
+
+22. (product dos) = 7*9*3*5*1 = 945
+
+23. (null impares) = False
+
+24. (reverse impares) = ["tres", "uno"]
+
+25. (take 2 uno) = [3, 1]
+
+26. (drop 2 dos) = [3, 5, 1]
+
+27. (maximum dos) = 9
+
+28. (minimum impares) = "tres"  -- comparación lexicográfica, t(116) < u(117)
+
+29. (elem "cinco" impares) = False
+
+30. (elem "seis" impares) = False
+
+31. (not (elem "tres" impares)) = not True = False
+
+32. (notElem "tres" impares) = False
+
+33. ((elem "uno" impares) && (elem "siete" impares)) = True && False = False
+
+34. ((elem "uno" impares) || (elem "siete" impares)) = True || False = True
+
+35. (length ["Jose", "Antonio", "Mario"]) = 3
+
+36. (length [["Jose", "Antonio", "Mario"]]) = 1
+    -- lista de un solo elemento (que es una lista de strings)
+
+=========================================
+EJERCICIO 2: Tuplas
+=========================================
+
+1. (fst ("ana","carlos")) = "ana"
+
+2. (snd ("ana","carlos")) = "carlos"
+
+3. (zip [1..] ["uno", "dos", "tres", "cuatro"]) = [(1,"uno"),(2,"dos"),(3,"tres"),(4,"cuatro")]
+   -- ['d','o','s'] es equivalente a "dos" (String = [Char])
+
+=========================================
+EJERCICIO 3: Rangos y listas infinitas
+=========================================
+
+1. abecedario = ['a'..'z'] = "abcdefghijklmnopqrstuvwxyz"
+
+2. pares = [2, 4..20] = [2,4,6,8,10,12,14,16,18,20]
+
+3. impares = [21, 19..1] = [21,19,17,15,13,11,9,7,5,3,1]
+
+4. (take 10 [11, 22..]) = [11,22,33,44,55,66,77,88,99,110]
+   -- rango con paso 11
+
+5. (take 10 (cycle ['a','b','c'])) = "abcabcabca"
+
+6. (take 10 (repeat 10)) = [10,10,10,10,10,10,10,10,10,10]
+
+7. (replicate 10 10) = [10,10,10,10,10,10,10,10,10,10]
+
+=========================================
+EJERCICIO 4: Listas intencionales
+=========================================
+
+1. [x*2 | x <- [1..10]] = [2,4,6,8,10,12,14,16,18,20]
+
+2. [x*2 | x <- [1..10], x*2 >= 12] = [12,14,16,18,20]
+   -- filtra los que son >= 12
+
+3. frutas = ["naranjas", "peras", "uvas", "mandarinas", "peras"]
+
+4. [x | x <- frutas, x=="peras"] = ["peras", "peras"]
+
+5. lista = [3, 5, 2, 0, 4, 0, 1, 5, 0]
+
+6. sum [ 1 | x <- lista, x==0] = sum [1,1,1] = 3
+   -- cuenta cuantos ceros hay en la lista
+
+7. length [ x | x <- lista, x/=0] = length [3,5,2,4,1,5] = 6
+   -- (/=) es "distinto de", cuenta no-ceros
+
+=========================================
+EJERCICIO 3: Rangos y listas infinitas
+=========================================
+
+=========================================
+EJERCICIO 4: Listas intencionales
+=========================================
+
+=========================================
+EJERCICIO 5: Contar elementos pares de una lista
+=========================================
+
+pares :: (Integral a) => [a] -> Integer
+pares [] = 0
+pares (x:xs)
+  | even x    = 1 + pares xs
+  | otherwise = pares xs
+
+=========================================
+EJERCICIO 6: Cantidad de elementos de la lista de mayor longitud
+=========================================
+
+mayor_lista :: [[a]] -> Int
+mayor_lista [] = 0
+mayor_lista lista = maximum [length x | x <- lista]
+
+=========================================
+EJERCICIOS 7 en adelante
+=========================================
+
+Ejercicio 5: Contar elementos pares de una lista
+
+pares :: (Integral a) => [a] -> Integer
+pares [] = 0
+pares (x:xs)
+  | even x    = 1 + pares xs
+  | otherwise = pares xs
+
+=========================================
+EJERCICIO 7: Cubo de cada elemento de una lista
+=========================================
+
+cubo_lista :: (Num a) => [a] -> [a]
+cubo_lista lista = [x * x * x | x <- lista]
+
