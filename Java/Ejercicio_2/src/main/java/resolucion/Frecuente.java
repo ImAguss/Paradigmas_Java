@@ -68,13 +68,12 @@ public class Frecuente {
 
   public Integer canjearMillas(Integer cantidadMillas) {
 
-    Integer millas = getMillas();
-    Integer millas_actualizadas = 0;
+    Integer millasActuales = getMillas();
 
-    if (cantidadMillas <= millas) {
-      millas_actualizadas -= cantidadMillas;
-      setMillas(millas_actualizadas);
-      return millas_actualizadas;
+    if (cantidadMillas <= millasActuales) {
+      Integer millasRestantes = millasActuales - cantidadMillas;
+      setMillas(millasRestantes);
+      return millasRestantes;
     } else {
       return 0;
     }
@@ -83,6 +82,6 @@ public class Frecuente {
 
   @Override
   public String toString() {
-    return "Viajero{" + "dni=" + dni + "nombre=" + nombre + "apellido=" + apellido + "millas=" + millas + '}';
+    return "Viajero{ " + " dni= " + dni + " nombre= " + nombre + " apellido= " + apellido + " millas= " + millas + " }";
   }
 }
