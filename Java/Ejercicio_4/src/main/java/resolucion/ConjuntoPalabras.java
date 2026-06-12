@@ -9,6 +9,12 @@ public class ConjuntoPalabras {
     listaPalabras = new ArrayList<Palabra>();
   }
 
+  /*
+   * Se tiene que usar synchronized para especificar a java que este metodo usa
+   * una coleccion de datos que es accedida simultaneamente por varios hilos
+   * asi java implementa operaciones como la exclusion mutua para evitar
+   * colisiones.
+   */
   public synchronized void agregarPalabra(Palabra p) {
     Palabra palabra;
     palabra = buscar(p.getPalabra());
@@ -20,6 +26,12 @@ public class ConjuntoPalabras {
     }
   }
 
+  /*
+   * Busco una palabra recibida desde agregarPalabra() si esta en la coleccion de
+   * datos entonces significa que no hay que agregarla. En caso de que sea null,
+   * cosa que no fue encontrada, entonces se incrementa su contador de
+   * apariciones.
+   */
   public synchronized Palabra buscar(String palabra) {
     Palabra palabraEncontrada;
 
@@ -34,6 +46,7 @@ public class ConjuntoPalabras {
   public void mostrar() {
     String texto;
 
+    // Para cada palabra mostrar la palabra y la cantidad de veces que aparecio.
     for (Palabra p : listaPalabras) {
       texto = "Palabra: " + p.getPalabra() + "\n"
           + "Cantidad: " + p.getCantidadVeces() + "\n";
